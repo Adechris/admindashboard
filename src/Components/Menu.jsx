@@ -1,15 +1,14 @@
  
 
-
 import React from 'react';
 import { Card, CardContent, Typography, Tabs, Tab, Box, Grid } from '@mui/material';
-
 import Food1 from "../Assets/food1.jpeg";
 import Food2 from "../Assets/food2.jpeg";
 import Food3 from "../Assets/food3.jpeg";
 import Food4 from "../Assets/food4.jpeg";
 import Food5 from "../Assets/food5.jpeg";
 import Food6 from "../Assets/food6.jpeg";
+import { logEvent } from '../utils/analytics';  
 
 const menuItems = [
   {
@@ -48,6 +47,11 @@ const specialItems = [
 ];
 
 const MenuSection = ({ tabValue, setTabValue }) => {
+  const handleTabChange = (event, newValue) => {
+    setTabValue(newValue);
+    logEvent('MenuSection', 'Tab Changed', `Tab ${newValue}`);
+  };
+
   return (
     <Card>
       <CardContent>
@@ -57,7 +61,7 @@ const MenuSection = ({ tabValue, setTabValue }) => {
           </Typography>
           <Tabs
             value={tabValue}
-            onChange={(e, newValue) => setTabValue(newValue)}
+            onChange={handleTabChange}
           >
             <Tab label="All Category" />
             <Tab label="Breakfast" />
@@ -66,7 +70,6 @@ const MenuSection = ({ tabValue, setTabValue }) => {
           </Tabs>
         </Box>
         <Box sx={{ mt: 4 }}>
-       
           <Grid container spacing={2} sx={{ mb: 3 }}>
             {specialItems.map((item, index) => (
               <Grid item xs={12} sm={6} key={index}>
@@ -150,7 +153,6 @@ const MenuSection = ({ tabValue, setTabValue }) => {
             </Grid>
           ))}
         </Grid>
-     
       </CardContent>
     </Card>
   );

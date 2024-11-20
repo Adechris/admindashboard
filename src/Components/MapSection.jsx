@@ -1,7 +1,10 @@
+ 
+
 import React from 'react';
 import { Grid, Card, CardContent, Box, Typography, IconButton, List, ListItem, ListItemAvatar, ListItemText, Avatar, Divider } from '@mui/material';
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+import { logEvent } from '../utils/analytics';  
 
 const customerList = [
   {
@@ -65,8 +68,11 @@ const customerList = [
 const MapSection = () => {
   const { isLoaded } = useLoadScript({
     googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
-
   });
+
+  const handleMoreClick = () => {
+    logEvent('MapSection', 'More Clicked', 'Customer Map');
+  };
 
   if (!isLoaded) return <div>Loading...</div>;
 
@@ -77,7 +83,7 @@ const MapSection = () => {
           <CardContent>
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 2 }}>
               <Typography variant="h6">Customer Map</Typography>
-              <IconButton size="small">
+              <IconButton size="small" onClick={handleMoreClick}>
                 <MoreVertIcon />
               </IconButton>
             </Box>

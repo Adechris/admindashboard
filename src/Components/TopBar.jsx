@@ -1,6 +1,6 @@
  
 import React from 'react';
-import { 
+import {
   AppBar,
   Toolbar,
   InputBase,
@@ -14,13 +14,14 @@ import {
   useMediaQuery
 } from '@mui/material';
 import { styled } from '@mui/material/styles';
-import { 
+import {
   Search as SearchIcon,
   NotificationsNoneOutlined as NotificationIcon,
   Menu as MenuIcon,
   Mail as MailIcon,
 } from '@mui/icons-material';
- 
+import { logEvent } from '../utils/analytics'; 
+
 const Search = styled('div')(({ theme }) => ({
   position: 'relative',
   borderRadius: theme.shape.borderRadius,
@@ -64,32 +65,39 @@ const Topbar = ({ handleDrawerToggle, DRAWER_WIDTH = 240 }) => {
   const theme = useTheme();
   const isMobile = useMediaQuery(theme.breakpoints.down('sm'));
 
+  const handleMailClick = () => {
+    logEvent('Topbar', 'Mail Clicked', 'Mail Icon');
+  };
+
+  const handleNotificationClick = () => {
+    logEvent('Topbar', 'Notification Clicked', 'Notification Icon');
+  };
+
   return (
-    <AppBar 
-      position="fixed" 
-      color="transparent" 
-      elevation={0} 
-      sx={{ 
-        borderBottom: 1, 
+    <AppBar
+      position="fixed"
+      color="transparent"
+      elevation={0}
+      sx={{
+        borderBottom: 1,
         borderColor: 'grey.200',
         bgcolor: 'background.paper',
         zIndex: theme.zIndex.drawer + 1,
-        width: { 
-          sm: `calc(100% - ${DRAWER_WIDTH}px)` 
+        width: {
+          sm: `calc(100% - ${DRAWER_WIDTH}px)`
         },
-        ml: { 
-          sm: `${DRAWER_WIDTH}px` 
+        ml: {
+          sm: `${DRAWER_WIDTH}px`
         }
       }}
     >
-      <Toolbar 
-        sx={{ 
+      <Toolbar
+        sx={{
           justifyContent: 'space-between',
           minHeight: { xs: '56px', sm: '64px' },
           px: { xs: 1, sm: 2 }
         }}
       >
-         
         <Box sx={{ display: 'flex', alignItems: 'center', gap: 1 }}>
           {isMobile && (
             <IconButton
@@ -103,20 +111,20 @@ const Topbar = ({ handleDrawerToggle, DRAWER_WIDTH = 240 }) => {
             </IconButton>
           )}
           <Box>
-            <Typography 
-              variant="h6" 
-              component="h1" 
-              sx={{ 
+            <Typography
+              variant="h6"
+              component="h1"
+              sx={{
                 fontWeight: 600,
                 fontSize: { xs: '1.1rem', sm: '1.25rem' }
               }}
             >
               Hi, Taylor!
             </Typography>
-            <Typography 
-              variant="body2" 
+            <Typography
+              variant="body2"
               color="text.secondary"
-              sx={{ 
+              sx={{
                 display: { xs: 'none', sm: 'block' }
               }}
             >
@@ -125,8 +133,7 @@ const Topbar = ({ handleDrawerToggle, DRAWER_WIDTH = 240 }) => {
           </Box>
         </Box>
 
-       
-        <Search sx={{ 
+        <Search sx={{
           display: { xs: 'none', md: 'block' },
           maxWidth: { sm: '300px', md: '400px' }
         }}>
@@ -139,33 +146,28 @@ const Topbar = ({ handleDrawerToggle, DRAWER_WIDTH = 240 }) => {
           />
         </Search>
 
-      
         <Box sx={{ display: 'flex', alignItems: 'center', gap: { xs: 1, sm: 2 } }}>
-         
-         
-           <IconButton>
-               <Badge color="error" variant="dot">
-                 <MailIcon />
-               </Badge>
-            </IconButton>
-             <IconButton>
-               <Badge color="error" variant="dot">
-                 <NotificationIcon />
-               </Badge>
-            </IconButton>
-          
-          <Avatar 
+          <IconButton onClick={handleMailClick}>
+            <Badge color="error" variant="dot">
+              <MailIcon />
+            </Badge>
+          </IconButton>
+          <IconButton onClick={handleNotificationClick}>
+            <Badge color="error" variant="dot">
+              <NotificationIcon />
+            </Badge>
+          </IconButton>
+          <Avatar
             src="/api/placeholder/32/32"
             alt="Tynisha Obey"
-            sx={{ 
-              width: { xs: 32, sm: 40 }, 
+            sx={{
+              width: { xs: 32, sm: 40 },
               height: { xs: 32, sm: 40 }
             }}
           />
-          
-          <Typography 
-            variant="body2" 
-            sx={{ 
+          <Typography
+            variant="body2"
+            sx={{
               fontWeight: 500,
               display: { xs: 'none', sm: 'block' }
             }}

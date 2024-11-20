@@ -1,5 +1,4 @@
-
-
+ 
 
 import React from 'react';
 import {
@@ -24,6 +23,7 @@ import {
   Tooltip
 } from 'recharts';
 import { MoreHoriz as MoreHorizIcon } from '@mui/icons-material';
+import { logEvent } from '../utils/analytics';  
 
 const revenueData = [
   { month: 'Jan', free: 15000 },
@@ -58,6 +58,10 @@ const weeklyCustomersData = [
 const Charts = () => {
   const totalRevenue = '$112,340';
 
+  const handleMoreClick = () => {
+    logEvent('Charts', 'More Clicked', 'Revenue Chart');
+  };
+
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
       <Grid item xs={12} md={8}>
@@ -73,7 +77,7 @@ const Charts = () => {
                 </Typography>
               </Box>
               <Box>
-                <IconButton>
+                <IconButton onClick={handleMoreClick}>
                   <MoreHorizIcon />
                 </IconButton>
               </Box>
@@ -83,7 +87,7 @@ const Charts = () => {
                 <BarChart data={revenueData} margin={{ top: 20, right: 30, left: 20, bottom: 5 }}>
                   <CartesianGrid strokeDasharray="3 3" vertical={false} />
                   <XAxis dataKey="month" />
-                  <YAxis hide={true} />  
+                  <YAxis hide={true} />
                   <Tooltip />
                   <Bar dataKey="free" fill="#A9A9A9" radius={[5, 5, 0, 0]} barSize={40} />
                   <Bar dataKey="pending" fill="#8884d8" radius={[5, 5, 0, 0]} barSize={40} />
@@ -230,4 +234,4 @@ const Charts = () => {
   );
 };
 
-export default  Charts;
+export default Charts;

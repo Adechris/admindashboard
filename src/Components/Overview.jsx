@@ -1,3 +1,5 @@
+ 
+
 import React from 'react';
 import { Grid, Card, CardContent, Box, Typography } from '@mui/material';
 import {
@@ -6,14 +8,31 @@ import {
   People as CustomersIcon,
   ShoppingCart as OrdersIcon,
 } from '@mui/icons-material';
+import { logEvent } from '../utils/analytics'; 
 
-const  Overview = () => {
+const Overview = () => {
+  const handleMenuClick = () => {
+    logEvent('Overview', 'Menu Clicked', 'Total Menu');
+  };
+
+  const handleRevenueClick = () => {
+    logEvent('Overview', 'Revenue Clicked', 'Total Revenue');
+  };
+
+  const handleCustomersClick = () => {
+    logEvent('Overview', 'Customers Clicked', 'Total Customers');
+  };
+
+  const handleOrdersClick = () => {
+    logEvent('Overview', 'Orders Clicked', 'Total Orders');
+  };
+
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
       <Grid item xs={12} sm={3}>
         <Card>
           <CardContent>
-            <Box>
+            <Box onClick={handleMenuClick}>
               <MenuIcon sx={{ fontSize: 40 }} />
               <div>
                 <Typography color="textSecondary" gutterBottom>
@@ -28,7 +47,7 @@ const  Overview = () => {
       <Grid item xs={12} sm={3}>
         <Card>
           <CardContent>
-            <Box>
+            <Box onClick={handleRevenueClick}>
               <RevenueIcon sx={{ fontSize: 40 }} />
               <div>
                 <Typography color="textSecondary" gutterBottom>
@@ -43,7 +62,7 @@ const  Overview = () => {
       <Grid item xs={12} sm={3}>
         <Card>
           <CardContent>
-            <Box>
+            <Box onClick={handleCustomersClick}>
               <CustomersIcon sx={{ fontSize: 40 }} />
               <div>
                 <Typography color="textSecondary" gutterBottom>
@@ -58,7 +77,7 @@ const  Overview = () => {
       <Grid item xs={12} sm={3}>
         <Card>
           <CardContent>
-            <Box>
+            <Box onClick={handleOrdersClick}>
               <OrdersIcon sx={{ fontSize: 40 }} />
               <div>
                 <Typography color="textSecondary" gutterBottom>
@@ -74,4 +93,4 @@ const  Overview = () => {
   );
 };
 
-export default  Overview;
+export default Overview;
