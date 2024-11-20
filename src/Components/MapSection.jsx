@@ -2,6 +2,7 @@ import React from 'react';
 import { Grid, Card, CardContent, Box, Typography, IconButton, List, ListItem, ListItemAvatar, ListItemText, Avatar, Divider } from '@mui/material';
 import { MoreVert as MoreVertIcon } from '@mui/icons-material';
 import { GoogleMap, useLoadScript, Marker } from '@react-google-maps/api';
+// import {GOOGLE_MAP_API} from "dotenv"
 
 const customerList = [
   {
@@ -64,7 +65,8 @@ const customerList = [
 
 const MapSection = () => {
   const { isLoaded } = useLoadScript({
-    googleMapsApiKey: 'AIzaSyCGfPzOBoaEyzQ4-UyXwdatyVlKyZ6L9kk',
+    googleMapsApiKey: process.env.REACT_APP_GOOGLE_MAPS_API_KEY,
+
   });
 
   if (!isLoaded) return <div>Loading...</div>;
