@@ -25,7 +25,6 @@ import {
 } from 'recharts';
 import { MoreHoriz as MoreHorizIcon } from '@mui/icons-material';
 
-// Revenue data with multiple categories
 const revenueData = [
   { month: 'Jan', free: 15000 },
   { month: 'Feb', free: 33000 },
@@ -41,13 +40,11 @@ const revenueData = [
   { month: 'Dec', free: 65000 }
 ];
 
-// Customer data for main pie chart
 const customerData = [
   { name: 'Current customers', value: 82.3, color: '#8884d8' },
   { name: 'New customers', value: 17.7, color: '#82ca9d' }
 ];
 
-// Additional metrics data as pie charts
 const dailyCustomersData = [
   { name: 'Daily customer', value: 18, color: '#8884d8' },
   { name: 'Remaining', value: 82, color: '#f0f0f0' }
@@ -63,7 +60,6 @@ const Charts = () => {
 
   return (
     <Grid container spacing={3} sx={{ mb: 3 }}>
-      {/* Revenue Chart */}
       <Grid item xs={12} md={8}>
         <Card sx={{ height: '100%' }}>
           <CardContent>
@@ -101,7 +97,6 @@ const Charts = () => {
         </Card>
       </Grid>
 
-      {/*My Customer Charts */}
       <Grid item xs={12} md={4}>
         <Card sx={{ height: '100%' }}>
           <CardContent>
@@ -114,9 +109,7 @@ const Charts = () => {
               </Typography>
             </Box>
 
-            {/*My Charts Container */}
             <Box sx={{ display: 'flex', justifyContent: 'space-between', mb: 3 }}>
-              {/* Main Customer Pie Chart */}
               <Box sx={{ width: '45%', height: 200, position: 'relative' }}>
                 <ResponsiveContainer>
                   <PieChart>
@@ -151,9 +144,7 @@ const Charts = () => {
                 </Box>
               </Box>
 
-              {/*The Additional Metrics */}
               <Stack spacing={2} sx={{ width: '45%' }}>
-                {/* Daily Customers */}
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Box sx={{ width: '80px', height: 80 }}>
                     <ResponsiveContainer>
@@ -182,7 +173,6 @@ const Charts = () => {
                   </Box>
                 </Box>
 
-                {/* Weekly Customers */}
                 <Box sx={{ display: 'flex', alignItems: 'center' }}>
                   <Box sx={{ width: '80px', height: 80 }}>
                     <ResponsiveContainer>

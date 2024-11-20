@@ -13,7 +13,6 @@ import {
   useMediaQuery,
 } from '@mui/material';
 import {
-  Menu as MenuIcon,
   Dashboard as DashboardIcon,
   Assessment as AnalyticsIcon,
   People as CustomerIcon,
